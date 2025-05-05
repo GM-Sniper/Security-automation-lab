@@ -11,5 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run Bandit
+      uses: tj-actions/bandit@v1.0.0
+      with:
+        '.'
+
 # 1. Checkout the code using actions/checkout
 # 2. Run bandit using tj-actions bandit
