@@ -11,6 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    - name: Build Docker image
+      run: |
+        docker build -t Security-automation-lab:latest .
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@0.28.0
+      with:
+        image-ref: 'Security-automation-lab:latest'
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        severity: 'HIGH,CRITICAL'
+        
 
 # 1. Checkout the code
 # 2. Instal docker buildx  docker/setup-buildx-action@v3
