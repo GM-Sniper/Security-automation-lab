@@ -13,8 +13,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Run Bandit
-      uses: tj-actions/bandit@v6.1
-# 1. Checkout the code using actions/checkout
+      
+    - name: Run bandit
+      uses: tj-actions/bandit@v5.1
+# 1. heckout the code using actions/checkout
 # 2. Run bandit using tj-actions bandit
