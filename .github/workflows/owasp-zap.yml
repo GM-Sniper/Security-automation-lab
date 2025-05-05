@@ -11,6 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    - name: Build Docker image
+      run: |
+        docker build -t security-automation-lab:latest .
+    - name: Run Docker container
+      run: |
+        docker run -d --name webserver -p 8080:80 security-automation-lab:latest
+
+    - name: Run OWASP ZAP
+      uses: zaproxy/action-full-scan@v0.12.0
+      with:
+        target: 'http://localhost:8080'
+
 
     # 1. Checkout the Code
     # 2. Build the docker image localy 
